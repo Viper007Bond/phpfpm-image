@@ -22,7 +22,7 @@ RUN docker-php-ext-install -j$(nproc) \
         zip
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
-RUN pecl install xdebug
+RUN pecl install xdebug-beta
 RUN pecl install memcached
 RUN docker-php-ext-enable xdebug memcached
 RUN apt-get remove -y build-essential libz-dev libmemcached-dev
