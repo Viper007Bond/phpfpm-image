@@ -6,7 +6,7 @@ RUN echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set
 RUN apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libpng12-dev \
+        libpng-dev \
         libz-dev \
         less \
         postfix \
