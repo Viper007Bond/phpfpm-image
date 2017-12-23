@@ -1,9 +1,9 @@
 FROM php:7.2-fpm
 
 RUN apt-get update \
-    && echo "postfix postfix/mailname string example.com" | debconf-set-selections \
-    && echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections \
-    && apt-get install -y \
+RUN echo "postfix postfix/mailname string example.com" | debconf-set-selections \
+RUN echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections \
+RUN apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng12-dev \
@@ -14,20 +14,20 @@ RUN apt-get update \
         libmemcached11 \
         libmemcachedutil2 \
         libmemcached-dev \
-    && docker-php-ext-install -j$(nproc) \
+RUN docker-php-ext-install -j$(nproc) \
         mysqli \
         pdo \
         pdo_mysql \
         sockets \
         zip \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd \
-    && pecl install xdebug \
-    && pecl install memcached \
-    && docker-php-ext-enable xdebug memcached \
-    && apt-get remove -y build-essential libz-dev libmemcached-dev \
-    && apt-get autoremove -y \
-    && apt-get clean
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+RUN docker-php-ext-install -j$(nproc) gd \
+RUN pecl install xdebug \
+RUN pecl install memcached \
+RUN docker-php-ext-enable xdebug memcached \
+RUN apt-get remove -y build-essential libz-dev libmemcached-dev \
+RUN apt-get autoremove -y \
+RUN apt-get clean
 
 RUN curl https://getcomposer.org/download/$(curl -LSs https://api.github.com/repos/composer/composer/releases/latest | grep 'tag_name' | sed -e 's/.*: "//;s/".*//')/composer.phar > composer.phar \
     && chmod +x composer.phar \
