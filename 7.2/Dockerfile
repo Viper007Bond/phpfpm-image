@@ -14,6 +14,7 @@ RUN apt-get update \
         libmemcached11 \
         libmemcachedutil2 \
         libmemcached-dev \
+        unzip \
     && docker-php-ext-install -j$(nproc) \
         mysqli \
         pdo \
